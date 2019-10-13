@@ -65,7 +65,7 @@ class InteractiveRecord
 
   def self.find_by(hash)
     hash_key = hash.keys.first.to_s
-    hash_value = hash{hash_key}
+    hash_value = hash[hash_key]
     binding.pry
     sql = "SELECT * FROM #{self.table_name} WHERE #{hash_key} = #{hash_value}"
     DB[:conn].execute(sql)
