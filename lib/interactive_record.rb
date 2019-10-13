@@ -44,16 +44,16 @@ class InteractiveRecord
   end
 
   def save
-    if self.id
-      self.update #not sure if this if/update stuff needed
-    else
+    # if self.id
+    #   self.update #not sure if this if/update stuff needed
+    # else
       sql = <<-SQL
         INSERT INTO #{table_name_for_insert} (#{col_names_for_insert})
         VALUES (#{values_for_insert})
         SQL
       DB[:conn].execute(sql)
       @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
-    end
+    # end
   end
 
   def self.find_by_name(name)
