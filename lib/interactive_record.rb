@@ -62,9 +62,11 @@ class InteractiveRecord
     DB[:conn].execute(sql, name)
   end
 
-  def self.find_by(name: nil, grade: nil)
-    sql = "SELECT * FROM #{self.table_name} WHERE name = ? OR name = ?"
-    DB[:conn].execute(sql, name, grade)
+  def self.find_by(hash)
+    hash_key = hash.keys.first
+    hash_value = hash{hash_key}
+    sql = "SELECT * FROM #{self.table_name} WHERE #{hash_key} = #{hash_value}"
+    DB[:conn].execute(sql)
   end
 
 end
