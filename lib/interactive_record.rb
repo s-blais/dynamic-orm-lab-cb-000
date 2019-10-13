@@ -64,10 +64,10 @@ class InteractiveRecord
   end
 
   def self.find_by(hash)
-    hash_key = hash.keys.first
-    hash_value = hash[hash_key]
+    hash_key_to_col = hash.keys.first.to_s
+    hash_value = hash[hash.keys.first]
     binding.pry
-    sql = "SELECT * FROM #{self.table_name} WHERE #{hash_key} = #{hash_value}"
+    sql = "SELECT * FROM #{self.table_name} WHERE #{hash_key_to_col} = #{hash_value}"
     DB[:conn].execute(sql)
   end
 
