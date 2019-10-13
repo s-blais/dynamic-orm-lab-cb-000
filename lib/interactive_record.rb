@@ -1,6 +1,5 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
-require 'pry'
 
 class InteractiveRecord
 
@@ -45,7 +44,7 @@ class InteractiveRecord
 
   def save
     # if self.id
-    #   self.update #not sure if this if/update stuff needed
+    #   self.update (no update method required this lab)
     # else
       sql = <<-SQL
         INSERT INTO #{table_name_for_insert} (#{col_names_for_insert})
@@ -64,7 +63,9 @@ class InteractiveRecord
   end
 
   def self.find_by(hash)
+    # convert the key symbol to column name
     hash_key_to_col = hash.keys.first.to_s
+    # grab the value of the hash
     hash_value = hash[hash.keys.first]
     # OR hash_value = hash.values.first
     sql = "SELECT * FROM #{self.table_name} WHERE #{hash_key_to_col} = '#{hash_value}'"
